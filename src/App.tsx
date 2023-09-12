@@ -43,7 +43,7 @@ const App = () => {
           onClick={() => {
             circleRef?.current?.style.setProperty("opacity", "0");
             setTimeout(
-              () => circleRef?.current?.style.setProperty("opacity", "1"),
+              () => circleRef?.current?.style.setProperty("opacity", "0.99"),
               5000,
             );
           }}
