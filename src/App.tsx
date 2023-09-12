@@ -1,35 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useRef } from "react";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  // const [styleKey, setStyleKey] = useState("");
+
+  const boxRef = useRef<HTMLDivElement>(null);
+  const circleRef = useRef<HTMLDivElement>(null);
+
+  const styleAttributes = Object.keys({ ...circleRef?.current?.style });
+  console.log(styleAttributes);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className={"container"}>
+      <header className={"title"}>Browser Rendering</header>
+      <div className={"box"} ref={boxRef}>
+        <div className={"circle"} ref={circleRef} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      {/*<form className={"inputWrapper"}>*/}
+      {/*  <label htmlFor={"styleKey"} className={"label"}>*/}
+      {/*    Circle Style 직접 바꿔보기*/}
+      {/*  </label>*/}
+      {/*  <input id={"styleKey"} className={"input"} />*/}
+      {/*  <button type={"submit"} className={"button"}>*/}
+      {/*    적용*/}
+      {/*  </button>*/}
+      {/*</form>*/}
+      <div className={"buttonWrapper"}>
+        <button
+          className={"buttonAlignmentItems"}
+          onClick={() => {
+            boxRef?.current?.style.setProperty("align-items", "flex-start");
+            setTimeout(
+              () => boxRef?.current?.style.setProperty("align-items", "center"),
+              5000,
+            );
+          }}
+        >
+          align-items 을 변경하는 경우
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button
+          className={"buttonOpacity"}
+          onClick={() => {
+            circleRef?.current?.style.setProperty("opacity", "0");
+            setTimeout(
+              () => circleRef?.current?.style.setProperty("opacity", "1"),
+              5000,
+            );
+          }}
+        >
+          opacity 을 변경하는 경우
+        </button>
+        <button
+          className={"buttonBackgroundColor"}
+          onClick={() => {
+            circleRef?.current?.style.setProperty("background-color", "purple");
+            setTimeout(
+              () =>
+                circleRef?.current?.style.setProperty(
+                  "background-color",
+                  "white",
+                ),
+              5000,
+            );
+          }}
+        >
+          background-color 을 변경하는 경우
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
