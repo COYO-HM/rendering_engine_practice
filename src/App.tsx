@@ -2,69 +2,117 @@ import { useRef } from "react";
 import "./App.css";
 
 const App = () => {
-  // const [styleKey, setStyleKey] = useState("");
-
-  const boxRef = useRef<HTMLDivElement>(null);
-  const circleRef = useRef<HTMLDivElement>(null);
-
-  const styleAttributes = Object.keys({ ...circleRef?.current?.style });
-  console.log(styleAttributes);
+  const btnAlignmentRef = useRef<HTMLButtonElement>(null);
+  const btnBorderRightRef = useRef<HTMLButtonElement>(null);
+  const btnBgRef = useRef<HTMLButtonElement>(null);
+  const btnOpacityRef1 = useRef<HTMLButtonElement>(null);
+  const spanOpacityRef1 = useRef<HTMLSpanElement>(null);
+  const btnOpacityRef2 = useRef<HTMLButtonElement>(null);
+  const spanOpacityRef2 = useRef<HTMLSpanElement>(null);
 
   return (
     <div className={"container"}>
       <header className={"title"}>Browser Rendering</header>
-      <div className={"box"} ref={boxRef}>
-        <div className={"circle"} ref={circleRef} />
-      </div>
-      {/*<form className={"inputWrapper"}>*/}
-      {/*  <label htmlFor={"styleKey"} className={"label"}>*/}
-      {/*    Circle Style 직접 바꿔보기*/}
-      {/*  </label>*/}
-      {/*  <input id={"styleKey"} className={"input"} />*/}
-      {/*  <button type={"submit"} className={"button"}>*/}
-      {/*    적용*/}
-      {/*  </button>*/}
-      {/*</form>*/}
       <div className={"buttonWrapper"}>
         <button
           className={"buttonAlignmentItems"}
+          ref={btnAlignmentRef}
           onClick={() => {
-            boxRef?.current?.style.setProperty("align-items", "flex-start");
-            setTimeout(
-              () => boxRef?.current?.style.setProperty("align-items", "center"),
-              5000,
+            btnAlignmentRef?.current?.style.setProperty(
+              "align-items",
+              "flex-start",
             );
+            btnAlignmentRef?.current?.style.setProperty(
+              "cursor",
+              "not-allowed",
+            );
+            setTimeout(() => {
+              btnAlignmentRef?.current?.style.setProperty(
+                "align-items",
+                "center",
+              );
+              btnAlignmentRef?.current?.style.setProperty("cursor", "pointer");
+            }, 5000);
           }}
         >
-          align-items 을 변경하는 경우
+          <span>align-items 을 변경하는 경우</span>
         </button>
         <button
-          className={"buttonOpacity"}
+          className={"buttonBorderRightItems"}
+          ref={btnBorderRightRef}
           onClick={() => {
-            circleRef?.current?.style.setProperty("opacity", "0");
-            setTimeout(
-              () => circleRef?.current?.style.setProperty("opacity", "0.99"),
-              5000,
+            btnBorderRightRef?.current?.style.setProperty(
+              "border-right-color",
+              "blue",
             );
+            btnBorderRightRef?.current?.style.setProperty(
+              "cursor",
+              "not-allowed",
+            );
+            setTimeout(() => {
+              btnBorderRightRef?.current?.style.setProperty(
+                "border-right-color",
+                "white",
+              );
+              btnBorderRightRef?.current?.style.setProperty(
+                "cursor",
+                "pointer",
+              );
+            }, 5000);
           }}
         >
-          opacity 을 변경하는 경우
+          <span>border-right-color 을 변경하는 경우</span>
         </button>
         <button
+          ref={btnBgRef}
           className={"buttonBackgroundColor"}
           onClick={() => {
-            circleRef?.current?.style.setProperty("background-color", "purple");
-            setTimeout(
-              () =>
-                circleRef?.current?.style.setProperty(
-                  "background-color",
-                  "white",
-                ),
-              5000,
-            );
+            btnBgRef?.current?.style.setProperty("background", "blue");
+            btnBgRef?.current?.style.setProperty("cursor", "not-allowed");
+            setTimeout(() => {
+              btnBgRef?.current?.style.setProperty("cursor", "pointer");
+              btnBgRef?.current?.style.setProperty(
+                "background",
+                "linear-gradient(135deg, #badc58, #6ab04c)",
+              );
+            }, 5000);
           }}
         >
-          background-color 을 변경하는 경우
+          <span> background-color 을 변경하는 경우</span>
+        </button>
+        <button
+          className={"buttonOpacity1"}
+          ref={btnOpacityRef1}
+          onClick={() => {
+            spanOpacityRef1?.current?.style.setProperty("opacity", "0");
+            btnOpacityRef1?.current?.style.setProperty("cursor", "not-allowed");
+            setTimeout(() => {
+              spanOpacityRef1?.current?.style.setProperty("opacity", "0.99");
+              btnOpacityRef1?.current?.style.setProperty("cursor", "pointer");
+            }, 5000);
+          }}
+        >
+          <span ref={spanOpacityRef1}>
+            opacity 을 변경하는 경우
+            <br />: 0.99 ➡️ 0 ➡️ 0.99
+          </span>
+        </button>
+        <button
+          className={"buttonOpacity2"}
+          ref={btnOpacityRef2}
+          onClick={() => {
+            spanOpacityRef2?.current?.style.setProperty("opacity", "0");
+            btnOpacityRef2.current?.style.setProperty("cursor", "not-allowed");
+            setTimeout(() => {
+              spanOpacityRef2?.current?.style.setProperty("opacity", "1");
+              btnOpacityRef2?.current?.style.setProperty("cursor", "pointer");
+            }, 5000);
+          }}
+        >
+          <span ref={spanOpacityRef2}>
+            opacity 을 변경하는 경우
+            <br />: 1 ➡️ 0 ➡️ 1
+          </span>
         </button>
       </div>
     </div>
